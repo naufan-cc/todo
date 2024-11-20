@@ -1,13 +1,8 @@
-import TodoForm from "./features/todos/TodoForm";
-import TodoList from "./features/todos/todoList";
+import TodoPage from "./presentation/Todo/Pages/TodoPage";
 
 function App() {
 	return (
-		<div style={{ padding: "2rem" }}>
-			<h1>To-Do List</h1>
-			<TodoForm />
-			<TodoList />
-		</div>
+		<TodoPage />
 	);
 }
 
