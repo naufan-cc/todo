@@ -1,10 +1,13 @@
 import type { RootState } from "@/redux/store";
+import { createSelector } from "@reduxjs/toolkit";
 
-export const ongingTasksSelector = (state: RootState) =>
-	state.todo.filter((todo) => !todo.completed);
+const todosSelector = (state: RootState) => state.todo
 
-export const finishedTasksSelector = (state: RootState) =>
-	state.todo.filter((todo) => todo.completed);
+export const ongingTasksSelector = createSelector([todosSelector], (state) =>
+	state.filter((todo) => !todo.completed))
 
-export const todoSelector = (state: RootState, id: number) =>
+export const finishedTasksSelector = createSelector([todosSelector], (state) =>
+	state.filter((todo) => todo.completed))
+
+export const taskSelector = (state: RootState, id: number) =>
 	state.todo.find((todo) => todo.id === id);

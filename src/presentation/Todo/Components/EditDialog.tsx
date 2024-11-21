@@ -1,4 +1,4 @@
-import { useAppSelector } from "@/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { Button } from "@/shared/components/ui/button";
 import {
 	Dialog,
@@ -12,11 +12,12 @@ import {
 import { Input } from "@/shared/components/ui/input";
 import { Label } from "@/shared/components/ui/label";
 import { useEffect, useState } from "react";
-import { updateTodo } from "../Hooks/useRepository";
-import { todoSelector } from "@/interactions/Todo/Repositories";
+// import { updateTodo } from "../Hooks/useRepository";
+import { taskSelector } from "@/interactions/Todo/Repositories";
+import { updateTodo } from "@/redux/features/todo/todoSlice";
 
 export function EditDialog({ id }: { id: number }) {
-	const todo = useAppSelector((state) => todoSelector(state, id));
+	const todo = useAppSelector((state) => taskSelector(state, id));
 
 	const [currentTask, setCurrentTask] = useState<string>("");
 	const [open, setOpen] = useState(false);
@@ -27,8 +28,11 @@ export function EditDialog({ id }: { id: number }) {
 		}
 	}, [todo]);
 
-	const handleUpdate = async () => {
-		updateTodo.execute(id, currentTask);
+	const dispatch = useAppDispatch();
+
+	const handleUpdate = async () => { 
+		// updateTodo.execute(id, currentTask);
+		dispatch(updateTodo({ id, newTask: currentTask }));
 		setOpen(false);
 	};
 

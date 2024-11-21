@@ -11,8 +11,13 @@ import {
 	FormMessage,
 } from "@/shared/components/ui/form";
 import { Input } from "@/shared/components/ui/input";
-import { addTodo } from "../Hooks/useRepository";
-import { TodoFormResolver, type TodoFormType } from "@/domain/Todo/Factory/TodoFormFactory";
+// import { addTodo } from "../Hooks/useRepository";
+import {
+	TodoFormResolver,
+	type TodoFormType,
+} from "@/domain/Todo/Factory/TodoFormFactory";
+import { useAppDispatch } from "@/redux/hooks";
+import { addTodo } from "@/redux/features/todo/todoSlice";
 
 const TodoForm: React.FC = () => {
 	const form = useForm<TodoFormType>({
@@ -22,8 +27,11 @@ const TodoForm: React.FC = () => {
 		},
 	});
 
+	const dispatch = useAppDispatch();
+
 	async function onSubmit(values: TodoFormType) {
-		addTodo.execute(values.task);
+		// addTodo.execute(values.task);
+		dispatch(addTodo(values.task));
 		form.reset();
 	}
 
