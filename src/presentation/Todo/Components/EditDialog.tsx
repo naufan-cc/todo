@@ -13,11 +13,10 @@ import { Input } from "@/shared/components/ui/input";
 import { Label } from "@/shared/components/ui/label";
 import { useEffect, useState } from "react";
 import { updateTodo } from "../Hooks/useRepository";
+import { todoSelector } from "@/interactions/Todo/Repositories";
 
 export function EditDialog({ id }: { id: number }) {
-	const todo = useAppSelector((state) =>
-		state.todo.find((task) => task.id === id),
-	);
+	const todo = useAppSelector((state) => todoSelector(state, id));
 
 	const [currentTask, setCurrentTask] = useState<string>("");
 	const [open, setOpen] = useState(false);

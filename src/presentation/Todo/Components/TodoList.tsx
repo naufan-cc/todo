@@ -1,11 +1,13 @@
 import { useAppSelector } from "@/redux/hooks";
 import TodoCard from "./TodoCard";
+import {
+	finishedTasksSelector,
+	ongingTasksSelector,
+} from "@/interactions/Todo/Repositories";
 
 const TodoList: React.FC = () => {
-	const todos = useAppSelector((state) => state.todo);
-
-	const ongoingTasks = todos.filter((todo) => !todo.completed);
-	const finishedTasks = todos.filter((todo) => todo.completed);
+	const ongoingTasks = useAppSelector(ongingTasksSelector);
+	const finishedTasks = useAppSelector(finishedTasksSelector);
 
 	const hasOngoingTasks = ongoingTasks.length > 0;
 	const hasFinishedTasks = finishedTasks.length !== 0;
