@@ -4,22 +4,18 @@ import { Button } from "@/shared/components/ui/button";
 import type { Todo } from "@/domain/Todo/Entities/Todo";
 import { EditDialog } from "./EditDialog";
 import { useState } from "react";
-import { useAppDispatch } from "@/store/hooks";
-import { completeTodo, deleteTodo } from "@/store/reducers/Todo/Todo.action";
+import { useTodoModule } from "@/domain/Todo/Container";
 
 const TodoCard: React.FC<Todo> = ({ id, task, completed }) => {
 	const [checked, setChecked] = useState(true);
-
-	const dispatch = useAppDispatch();
+	const { completeTodo, deleteTodo } = useTodoModule();
 
 	const handleToggle = async () => {
-		// completeTodo.execute(id);
-		dispatch(completeTodo(id));
+		completeTodo(id);
 	};
 
 	const handleDelete = async () => {
-		// deleteTodo.execute(id);
-		dispatch(deleteTodo(id));
+		deleteTodo(id);
 	};
 
 	return (

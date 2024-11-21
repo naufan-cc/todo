@@ -15,8 +15,7 @@ import {
 	TodoFormResolver,
 	type TodoFormType,
 } from "@/domain/Todo/Factory/TodoFormFactory";
-import { addTodo } from "@/store/reducers/Todo/Todo.action";
-import { useAppDispatch } from "@/store/hooks";
+import { useTodoModule } from "@/domain/Todo/Container";
 
 const TodoForm: React.FC = () => {
 	const form = useForm<TodoFormType>({
@@ -26,11 +25,10 @@ const TodoForm: React.FC = () => {
 		},
 	});
 
-	const dispatch = useAppDispatch();
+	const { addTodo } = useTodoModule();
 
 	async function onSubmit(values: TodoFormType) {
-		// addTodo.execute(values.task);
-		dispatch(addTodo(values.task));
+		addTodo(values.task);
 		form.reset();
 	}
 

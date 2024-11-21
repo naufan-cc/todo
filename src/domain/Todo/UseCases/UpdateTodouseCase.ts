@@ -1,9 +1,6 @@
-import type { TodoRepository } from '../Repositories/TodoRepository';
+import type { ITodoRepository } from "../Repositories/TodoRepository";
 
-export class UpdateTodoUseCase {
-    constructor(private todoRepository: TodoRepository) {}
-
-    execute(id: number, task: string): void {
-        this.todoRepository.updateTodo(id, task);
-    }
-}
+export const UpdateTodoUseCase =
+	(repository: ITodoRepository) =>
+	(id: number, task: string): void =>
+		repository.updateTodo(id, task);

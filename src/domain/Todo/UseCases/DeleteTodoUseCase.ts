@@ -1,9 +1,6 @@
-import type { TodoRepository } from '../Repositories/TodoRepository';
+import type { ITodoRepository } from '../Repositories/TodoRepository';
 
-export class DeleteTodoUseCase {
-    constructor(private todoRepository: TodoRepository) {}
-
-    execute(id: number): void {
-        this.todoRepository.deleteTodo(id);
-    }
-}
+export const DeleteTodoUseCase =
+	(repository: ITodoRepository) =>
+	(id: number): void =>
+		repository.deleteTodo(id);
