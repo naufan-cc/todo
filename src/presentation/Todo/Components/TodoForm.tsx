@@ -11,25 +11,18 @@ import {
 	FormMessage,
 } from "@/shared/components/ui/form";
 import { Input } from "@/shared/components/ui/input";
-import { z } from "zod";
 import { addTodo } from "../Hooks/useRepository";
-
-const formSchema = z.object({
-	task: z
-		.string()
-		.min(8, { message: "Task is too short" })
-		.max(20, { message: "Task is too long" }),
-});
+import { TodoFormResolver, type TodoFormType } from "@/domain/Todo/Factory/TodoFormFactory";
 
 const TodoForm: React.FC = () => {
-	const form = useForm<z.infer<typeof formSchema>>({
-		resolver: zodResolver(formSchema),
+	const form = useForm<TodoFormType>({
+		resolver: zodResolver(TodoFormResolver),
 		defaultValues: {
 			task: "",
 		},
 	});
 
-	async function onSubmit(values: z.infer<typeof formSchema>) {
+	async function onSubmit(values: TodoFormType) {
 		addTodo.execute(values.task);
 		form.reset();
 	}
