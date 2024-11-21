@@ -1,28 +1,14 @@
-import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import todoReducer from "./features/todo/todoSlice";
+import { configureStore } from "@reduxjs/toolkit";
 import {
 	FLUSH,
 	PAUSE,
 	PERSIST,
-	persistReducer,
 	persistStore,
 	PURGE,
 	REGISTER,
 	REHYDRATE,
 } from "redux-persist";
-import storage from "redux-persist/lib/storage";
-
-const persistConfig = {
-	key: "root",
-	storage,
-	version: 1,
-};
-
-const rootReducer = combineReducers({ 
-  todo: todoReducer,
-})
-
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+import { persistedReducer } from "./root-reducers";
 
 export const store = configureStore({
 	reducer: persistedReducer,

@@ -4,9 +4,8 @@ import { Button } from "@/shared/components/ui/button";
 import type { Todo } from "@/domain/Todo/Entities/Todo";
 import { EditDialog } from "./EditDialog";
 import { useState } from "react";
-// import { completeTodo, deleteTodo } from "../Hooks/useRepository";
-import { useAppDispatch } from "@/redux/hooks";
-import { completeTodo, deleteTodo } from "@/redux/features/todo/todoSlice";
+import { useAppDispatch } from "@/store/hooks";
+import { completeTodo, deleteTodo } from "@/store/reducers/Todo/Todo.action";
 
 const TodoCard: React.FC<Todo> = ({ id, task, completed }) => {
 	const [checked, setChecked] = useState(true);

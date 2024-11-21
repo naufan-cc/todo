@@ -1,9 +1,6 @@
-import { useAppSelector } from "@/redux/hooks";
+import { finishedTasksSelector, ongingTasksSelector } from "@/store/reducers/Todo/Todo.selector";
 import TodoCard from "./TodoCard";
-import {
-	finishedTasksSelector,
-	ongingTasksSelector,
-} from "@/interactions/Todo/Repositories";
+import { useAppSelector } from "@/store/hooks";
 
 const TodoList: React.FC = () => {
 	const ongoingTasks = useAppSelector(ongingTasksSelector);

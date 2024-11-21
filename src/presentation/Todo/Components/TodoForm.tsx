@@ -11,13 +11,12 @@ import {
 	FormMessage,
 } from "@/shared/components/ui/form";
 import { Input } from "@/shared/components/ui/input";
-// import { addTodo } from "../Hooks/useRepository";
 import {
 	TodoFormResolver,
 	type TodoFormType,
 } from "@/domain/Todo/Factory/TodoFormFactory";
-import { useAppDispatch } from "@/redux/hooks";
-import { addTodo } from "@/redux/features/todo/todoSlice";
+import { addTodo } from "@/store/reducers/Todo/Todo.action";
+import { useAppDispatch } from "@/store/hooks";
 
 const TodoForm: React.FC = () => {
 	const form = useForm<TodoFormType>({
